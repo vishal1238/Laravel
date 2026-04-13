@@ -11,9 +11,9 @@
         @csrf 
         @method('PUT')
 
-        Name: <input type="text" name="name" value="{{$student['name']}}">
-        Email: <input type="text" name="email" value="{{$student['email']}}">
-        Age: <input type="number" name="age" value="{{$student['age']}}">
+        Name: <input type="text" name="name" value="{{$student['name']}}"><br>
+        Email: <input type="text" name="email" value="{{$student['email']}}"><br>
+        Age: <input type="number" name="age" value="{{$student['age']}}"><br>
         <button type="submit"> Update</button>
     </form>
 
