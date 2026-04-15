@@ -13,3 +13,20 @@ Route::put('/student/update/{id}', [UserController::class, 'update']);
 
 Route::get('/register', [RegisterController::class, 'create']);
 Route::post('/register', [RegisterController::class, 'store']);
+
+
+//----Custom validation
+use App\Http\Controllers\TestController;
+
+Route::get('/test', [TestController::class, 'form']);
+Route::get('/test', [TestController::class, 'submit']);
+
+//create a form and apply validations
+//form should not be empty
+//min length will be 3 for name
+//email required and value of email - "abc@gamil.com"
+
+use App\Http\Controllers\Test1Controller;
+
+Route::get('/form', [Test1Controller::class, 'showForm'])->name('form.show');
+Route::post('/form', [Test1Controller::class, 'submitForm'])->name('form.submit');
