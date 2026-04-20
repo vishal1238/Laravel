@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Rules\CheckName; // make sure this exists
+use App\Rules\CheckName1; // make sure this exists
 
 class TestController extends Controller
 {
     public function form(Request $request){
         // validation
         $request->validate([
-            'name' => ['required', new CheckName]
+            'name' => ['required', new CheckName1]
         ]);
 
         return "Form Submitted successfully";
@@ -19,7 +19,7 @@ class TestController extends Controller
     public function submit(Request $request){
         // validation
         $request->validate([
-            'name' => ['required', new CheckName]
+            'name' => ['required', new CheckName1]
         ]);
 
         return "Form Submitted successfully";
