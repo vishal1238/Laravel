@@ -33,6 +33,34 @@ use Illuminate\Support\Facades\Route;
 
 
 //--- Repopulating Form---
-use App\Http\Controllers\User1Controller;
-Route::get('/user', [User1Controller::class, 'form']);
-Route::post('/user', [User1Controller::class, 'submit']);
+// use App\Http\Controllers\User1Controller;
+// Route::get('/user', [User1Controller::class, 'form']);
+// Route::post('/user', [User1Controller::class, 'submit']);
+
+
+//------ Cookies -------------
+use Illuminate\Http\Request;
+
+Route::get("/", function () {
+    return view('cookie-form');
+});
+
+Route::post("/set-cookie", function (Request $request) {
+    return response()
+        ->view('cookie-result', ['name' => $request->name])
+        ->cookie('username', $request->name, 60); // 60 minutes
+});
+
+Route::get('/get-cookie', function(Request $request){
+    $name = $request-> cookie('username');
+    return view('cookie-get',['name' => $name]);
+});
+
+Route::get('/delete-cookie', function(){
+    return response("cookie deleted")
+    ->cookie('username','', -1); //expire cookie
+});
+
+
+
+//Task - Set a cookie for a product, cookie will hold the name of the product. 
