@@ -64,19 +64,49 @@ use Illuminate\Support\Facades\Route;
 
 
 //Task - Set a cookie for a product, cookie will hold the name of the product. 
+// use Illuminate\Http\Request;
+
+// Route::get("/", function () {
+//     return view('product-form');
+// });
+
+// Route::post("/set-product-cookie", function (Request $request) {
+//     return response()
+//         ->view('product-result', ['product' => $request->product])
+//         ->cookie('product_name', $request->product, 30);
+// });
+
+// Route::get('/get-product-cookie', function(Request $request){
+//     $product = $request->cookie('product_name');
+//     return view('product-get', ['product' => $product]);
+// });
+
+
+//-----------Session-------
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
-Route::get("/", function () {
-    return view('product-form');
+//show form
+Route::get('/', function(){
+    return view('session-form');
 });
 
-Route::post("/set-product-cookie", function (Request $request) {
-    return response()
-        ->view('product-result', ['product' => $request->product])
-        ->cookie('product_name', $request->product, 30);
+//to store session
+Route::post("/set-session", function(Request $request){
+    session(['username' => $request->input('username')]);
+    return redirect('/get-session');
 });
 
-Route::get('/get-product-cookie', function(Request $request){
-    $product = $request->cookie('product_name');
-    return view('product-get', ['product' => $product]);
+//get session
+Route::get('/get-session', function(){
+    $name = session('username');
+    return view('session-get', compact('name'));
 });
+
+//Delete Session
+Route::get('/delete-session', function(){
+    return response("Session deleted");
+    session()-> forget('username');
+    return redirect('/');
+});
+
