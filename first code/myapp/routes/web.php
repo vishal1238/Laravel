@@ -39,28 +39,44 @@ use Illuminate\Support\Facades\Route;
 
 
 //------ Cookies -------------
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
-Route::get("/", function () {
-    return view('cookie-form');
-});
+// Route::get("/", function () {
+//     return view('cookie-form');
+// });
 
-Route::post("/set-cookie", function (Request $request) {
-    return response()
-        ->view('cookie-result', ['name' => $request->name])
-        ->cookie('username', $request->name, 60); // 60 minutes
-});
+// Route::post("/set-cookie", function (Request $request) {
+//     return response()
+//         ->view('cookie-result', ['name' => $request->name])
+//         ->cookie('username', $request->name, 60); // 60 minutes
+// });
 
-Route::get('/get-cookie', function(Request $request){
-    $name = $request-> cookie('username');
-    return view('cookie-get',['name' => $name]);
-});
+// Route::get('/get-cookie', function(Request $request){
+//     $name = $request-> cookie('username');
+//     return view('cookie-get',['name' => $name]);
+// });
 
-Route::get('/delete-cookie', function(){
-    return response("cookie deleted")
-    ->cookie('username','', -1); //expire cookie
-});
+// Route::get('/delete-cookie', function(){
+//     return response("cookie deleted")
+//     ->cookie('username','', -1); //expire cookie
+// });
 
 
 
 //Task - Set a cookie for a product, cookie will hold the name of the product. 
+use Illuminate\Http\Request;
+
+Route::get("/", function () {
+    return view('product-form');
+});
+
+Route::post("/set-product-cookie", function (Request $request) {
+    return response()
+        ->view('product-result', ['product' => $request->product])
+        ->cookie('product_name', $request->product, 30);
+});
+
+Route::get('/get-product-cookie', function(Request $request){
+    $product = $request->cookie('product_name');
+    return view('product-get', ['product' => $product]);
+});
