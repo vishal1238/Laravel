@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\UserController;
 // use App\Http\Controllers\RegisterController;
@@ -141,5 +142,12 @@ use Illuminate\Support\Facades\Route;
 
 
 
-//-----------Handle upload
-//Route::post('/upload')
+
+//------Upload File-------------
+//show the Route
+Route::get('/', function(){
+    return view('upload');
+});
+
+Route::post('/upload', [FileController::class, 'upload'])
+->name('file.upload');
