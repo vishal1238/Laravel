@@ -83,30 +83,63 @@ use Illuminate\Support\Facades\Route;
 
 
 //-----------Session-------
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+// use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Redirect;
 
-//show form
-Route::get('/', function(){
-    return view('session-form');
-});
+// //show form
+// Route::get('/', function(){
+//     return view('session-form');
+// });
 
-//to store session
-Route::post("/set-session", function(Request $request){
-    session(['username' => $request->input('username')]);
-    return redirect('/get-session');
-});
+// //to store session
+// Route::post("/set-session", function(Request $request){
+//     session(['username' => $request->input('username')]);
+//     return redirect('/get-session');
+// });
 
-//get session
-Route::get('/get-session', function(){
-    $name = session('username');
-    return view('session-get', compact('name'));
-});
+// //get session
+// Route::get('/get-session', function(){
+//     $name = session('username');
+//     return view('session-get', compact('name'));
+// });
 
-//Delete Session
-Route::get('/delete-session', function(){
-    return response("Session deleted");
-    session()-> forget('username');
-    return redirect('/');
-});
+// //Delete Session
+// Route::get('/delete-session', function(){
+//     return response("Session deleted");
+//     session()-> forget('username');
+//     return redirect('/');
+// });
 
+
+//TASK: create a form to work with session of a social media page
+//Username and password of user should be store in the session.
+
+// use Illuminate\Http\Request;
+
+// Route::get('/', function () {
+//     return view('login-form');
+// });
+
+// Route::post('/login', function (Request $request) {
+//     // store data in session
+//     session([
+//         'username' => $request->username,
+//         'password' => $request->password
+//     ]);
+
+//     return redirect('/dashboard');
+// });
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// });
+
+// Route::get('/logout', function () {
+//     session()->flush(); // clear session
+//     return redirect('/');
+// });
+
+
+
+//-----------Handle upload
+//Route::post('/upload')
