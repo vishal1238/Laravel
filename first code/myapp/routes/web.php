@@ -155,30 +155,45 @@ use Illuminate\Support\Facades\Route;
 
 
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Cookie;
+// use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Redirect;
+// use Illuminate\Support\Facades\Cookie;
 
-Route::get('/', function(){
-    return view('cookieSession');
-});
+// Route::get('/', function(){
+//     return view('cookieSession');
+// });
 
-//------store session and Cookie
-Route::post('/store', function(Request $request){
-    // store in session
-    session(['username' => $request->name]);
+// //------store session and Cookie
+// Route::post('/store', function(Request $request){
+//     // store in session
+//     session(['username' => $request->name]);
     
-    // create the cookie
-    $cookie = Cookie::make('user_cookie', $request->name, 60);
+//     // create the cookie
+//     $cookie = Cookie::make('user_cookie', $request->name, 60);
 
-    return Redirect('/show')->withCookie($cookie);
+//     return Redirect('/show')->withCookie($cookie);
+// });
+
+// //----Retrieve session and cookie
+// Route::get('/show', function (Request $request){
+//     $sessionData = session('username');              // session
+//     $cookieData = $request->cookie('user_cookie');   // cookie
+
+//     return view('show', compact('sessionData', 'cookieData'));
+// });
+
+
+//Create a session and cookie to store the details of a product.
+//Create atleast 2 inputs in form
+
+
+//-----------Mail-----------
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
+
+Route::get('/send-mail', function () {
+    Mail::to('webervishal@gmail.com')
+        ->send(new TestMail());
+
+    return "Mail sent Successfully";
 });
-
-//----Retrieve session and cookie
-Route::get('/show', function (Request $request){
-    $sessionData = session('username');              // session
-    $cookieData = $request->cookie('user_cookie');   // cookie
-
-    return view('show', compact('sessionData', 'cookieData'));
-});
-
