@@ -145,9 +145,40 @@ use Illuminate\Support\Facades\Route;
 
 //------Upload File-------------
 //show the Route
+// Route::get('/', function(){
+//     return view('upload');
+// });
+
+// Route::post('/upload', [FileController::class, 'upload'])
+// ->name('file.upload');
+
+
+
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Cookie;
+
 Route::get('/', function(){
-    return view('upload');
+    return view('cookieSession');
 });
 
-Route::post('/upload', [FileController::class, 'upload'])
-->name('file.upload');
+//------store session and Cookie
+Route::post('/store', function(Request $request){
+    // store in session
+    session(['username' => $request->name]);
+    
+    // create the cookie
+    $cookie = Cookie::make('user_cookie', $request->name, 60);
+
+    return Redirect('/show')->withCookie($cookie);
+});
+
+//----Retrieve session and cookie
+Route::get('/show', function (Request $request){
+    $sessionData = session('username');              // session
+    $cookieData = $request->cookie('user_cookie');   // cookie
+
+    return view('show', compact('sessionData', 'cookieData'));
+});
+
